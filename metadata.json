@@ -1,0 +1,6 @@
+{
+  "name": "Income Network - Affiliate & Referral Platform",
+  "description": "Modern, high-converting affiliate and referral earning platform with real-time tracking, multi-tier commission insights, and administrative controls.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

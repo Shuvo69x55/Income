@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Referral System &amp; Marketing Hub - Income Network</title>
+  <meta name="description" content="View your complete multi-tier affiliate referral tree, direct referrals, commission history, and ready-to-use marketing assets." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Top Navigation (3-Zone Contract) -->
+  <header class="top-nav">
+    <div class="container top-nav-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">⚡</div>
+        <span class="brand-text">Income<span class="brand-highlight">Network</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="referral.html" class="nav-link active">Referral Center</a>
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="admin.html" class="nav-link">Admin Portal</a>
+      </nav>
+
+      <div class="nav-actions" id="nav-actions">
+        <!-- Injected dynamically by app.js -->
+      </div>
+    </div>
+  </header>
+
+  <!-- Referral System Content -->
+  <main class="app-layout">
+    <div class="container">
+
+      <!-- Breadcrumb / Header -->
+      <div style="margin-bottom: 2rem;">
+        <span class="section-kicker">Affiliate Engine</span>
+        <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Referral Network &amp; Attribution Hub</h1>
+        <p style="color: var(--text-muted);">
+          Monitor direct signups, secondary override conversions, and grab optimized marketing materials.
+        </p>
+      </div>
+
+      <!-- Referral Link Showcase Card -->
+      <div class="card" style="margin-bottom: 2.5rem; background: linear-gradient(135deg, #131f36 0%, #0d1526 100%);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+          <div>
+            <h3 style="font-size: 1.25rem;">Your Dedicated Affiliate Referral Link</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem;">
+              Format: <code>https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/?ref=<span class="referral-code-display tabular-nums">CODE</span></code>
+            </p>
+          </div>
+          <div class="meta-row">
+            <span>Cookie: <strong>90 Days</strong></span>
+            <span class="meta-separator">·</span>
+            <span>Direct Commission: <strong>25%</strong></span>
+            <span class="meta-separator">·</span>
+            <span>Tier 2: <strong>10%</strong></span>
+          </div>
+        </div>
+
+        <div class="referral-input-group" style="margin-bottom: 1.25rem;">
+          <input type="text" class="referral-link-display" readonly value="https://incomenetwork.io/?ref=DEMO100" />
+          <button class="btn btn-primary copy-ref-link-action" style="padding-left: 1.75rem; padding-right: 1.75rem;">
+            📋 Copy Link
+          </button>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+          <button class="btn btn-secondary btn-sm" onclick="
+            const code = document.querySelector('.referral-code-display').textContent;
+            const testUrl = window.location.origin + window.location.pathname.replace('referral.html', 'index.html') + '?ref=' + code;
+            window.open(testUrl, '_blank');
+          ">
+            🔗 Test Link in New Tab (?ref=)
+          </button>
+          <span style="font-size: 0.8rem; color: var(--text-dim);">
+            Clicks automatically register attribution cookies in local storage.
+          </span>
+        </div>
+      </div>
+
+      <!-- 4 Core Referral Stats Grid -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-card-title">Total Network Referrals</div>
+          <div id="ref-total-count" class="stat-card-value tabular-nums" style="color: var(--accent-primary);">6</div>
+          <div class="stat-card-sub">Combined Tier 1 &amp; Tier 2</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-title">Direct Referrals (Tier 1)</div>
+          <div id="ref-tier1-count" class="stat-card-value tabular-nums">5</div>
+          <div class="stat-card-sub">Earns 25% direct commission</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-title">Network Overrides (Tier 2)</div>
+          <div id="ref-tier2-count" class="stat-card-value tabular-nums" style="color: var(--accent-cyan);">1</div>
+          <div class="stat-card-sub">Earns 10% secondary override</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-title">Total Referral Earnings</div>
+          <div id="ref-total-commission" class="stat-card-value tabular-nums">$145.00</div>
+          <div class="stat-card-sub">Gross earnings from referrals</div>
+        </div>
+      </div>
+
+      <!-- Referral History Table -->
+      <div class="table-wrapper">
+        <div class="table-header-bar">
+          <h3 class="table-header-title">Referral History &amp; Network Roster</h3>
+          <span style="font-size: 0.85rem; color: var(--text-muted);">Attribution log updated in real-time</span>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Referred Partner</th>
+                <th>Joined Date</th>
+                <th>Tier Level</th>
+                <th>Commission</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="referral-history-tbody">
+              <!-- Populated by app.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Marketing Kit & Promotional Assets -->
+      <div style="margin-top: 3.5rem;">
+        <div class="section-header" style="text-align: left; margin-bottom: 1.5rem;">
+          <span class="section-kicker">Promo Toolkit</span>
+          <h2 style="font-size: 1.6rem;">High-Converting Promotional Assets</h2>
+          <p>Copy and paste these pre-formatted snippets into your social posts, emails, or websites.</p>
+        </div>
+
+        <div class="grid-3">
+          <!-- Snippet 1: Twitter / X -->
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+              <h4 style="font-size: 1rem; color: var(--text-main);">𝕏 / Social Post Template</h4>
+              <button id="copy-tweet-snippet" class="btn btn-secondary btn-sm">Copy</button>
+            </div>
+            <div style="background: var(--bg-input); padding: 1rem; border-radius: var(--radius-sm); font-size: 0.825rem; color: var(--text-muted); line-height: 1.5; border: 1px solid var(--border-subtle);">
+              "I'm using Income Network to earn daily recurring affiliate income! Sign up with my link to claim an instant $10 welcome bonus: <span style="color: var(--accent-primary);">[YOUR-LINK]</span> #Affiliate #PassiveIncome"
+            </div>
+          </div>
+
+          <!-- Snippet 2: Email Invite -->
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+              <h4 style="font-size: 1rem; color: var(--text-main);">📧 Email Invitation</h4>
+              <button id="copy-email-snippet" class="btn btn-secondary btn-sm">Copy</button>
+            </div>
+            <div style="background: var(--bg-input); padding: 1rem; border-radius: var(--radius-sm); font-size: 0.825rem; color: var(--text-muted); line-height: 1.5; border: 1px solid var(--border-subtle);">
+              "Hey, I wanted to share this new affiliate platform with you: Income Network. It offers up to 25% direct commissions and daily payouts. Claim your $10 starter bonus: <span style="color: var(--accent-primary);">[YOUR-LINK]</span>"
+            </div>
+          </div>
+
+          <!-- Snippet 3: HTML Banner -->
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+              <h4 style="font-size: 1rem; color: var(--text-main);">🖼️ HTML Web Banner Code</h4>
+              <button id="copy-banner-snippet" class="btn btn-secondary btn-sm">Copy</button>
+            </div>
+            <div style="background: var(--bg-input); padding: 1rem; border-radius: var(--radius-sm); font-size: 0.775rem; font-family: var(--font-mono); color: var(--accent-cyan); line-height: 1.5; border: 1px solid var(--border-subtle); overflow-x: auto;">
+              &lt;a href="<span class="referral-link-display" style="color: var(--accent-primary);">[LINK]</span>" target="_blank"&gt;<br />
+              &nbsp;&nbsp;&lt;img src="banner.png" alt="Join Income Network" /&gt;<br />
+              &lt;/a&gt;
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Mobile Bottom Navigation -->
+  <nav class="mobile-bottom-nav">
+    <a href="index.html" class="mobile-nav-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+      <span>Home</span>
+    </a>
+    <a href="dashboard.html" class="mobile-nav-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+      <span>Dashboard</span>
+    </a>
+    <a href="referral.html" class="mobile-nav-item active">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+      <span>Referrals</span>
+    </a>
+    <a href="admin.html" class="mobile-nav-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      <span>Admin</span>
+    </a>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>

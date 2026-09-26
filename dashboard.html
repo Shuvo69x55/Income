@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partner Dashboard - Income Network</title>
+  <meta name="description" content="Manage your affiliate earnings, track active referrals, copy your unique referral link, and request payouts." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Top Navigation (3-Zone Contract) -->
+  <header class="top-nav">
+    <div class="container top-nav-inner">
+      <a href="index.html" class="brand">
+        <div class="brand-icon">⚡</div>
+        <span class="brand-text">Income<span class="brand-highlight">Network</span></span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="dashboard.html" class="nav-link active">Dashboard</a>
+        <a href="referral.html" class="nav-link">Referral Center</a>
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="admin.html" class="nav-link">Admin Portal</a>
+      </nav>
+
+      <div class="nav-actions" id="nav-actions">
+        <!-- Injected dynamically by app.js: user info + logout -->
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Dashboard Viewport -->
+  <main class="app-layout">
+    <div class="container">
+      
+      <!-- User Greeting & Profile Card -->
+      <div class="user-header-card">
+        <div class="user-profile-summary">
+          <div id="dash-user-avatar" class="user-avatar-large">D</div>
+          <div class="user-info-text">
+            <h2>Welcome back, <span id="dash-user-name">Demo Affiliate</span></h2>
+            <div class="user-meta-sub">
+              <span id="dash-user-username" style="color: var(--accent-primary); font-weight: 600;">@demouser</span>
+              <span class="meta-separator">·</span>
+              <span>Account ID: <strong id="dash-user-id" class="tabular-nums" style="color: var(--text-main);">IN-10492</strong></span>
+              <span class="meta-separator">·</span>
+              <span class="badge-status">
+                <span id="dash-user-status">Active Partner</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <button id="dash-withdraw-btn" class="btn btn-primary">
+            Request Payout
+          </button>
+        </div>
+      </div>
+
+      <!-- Referral Link Highlight & Share Container -->
+      <div class="referral-box">
+        <div class="referral-box-header">
+          <h3>
+            <span>🔗 Your Unique Referral Link</span>
+            <span style="font-size: 0.8rem; font-weight: 400; color: var(--text-muted);">(Cookie Duration: 90 Days)</span>
+          </h3>
+          <div style="font-size: 0.85rem;">
+            Code: <strong id="dash-ref-code" class="tabular-nums" style="color: var(--accent-primary); font-size: 1.05rem;">DEMO100</strong>
+            <button id="dash-copy-code-btn" class="btn btn-secondary btn-sm" style="margin-left: 0.5rem;">Copy Code</button>
+          </div>
+        </div>
+
+        <div class="referral-input-group">
+          <input type="text" id="dash-ref-link" readonly value="https://incomenetwork.io/?ref=DEMO100" />
+          <button id="dash-copy-link-btn" class="btn btn-primary" style="padding-left: 1.5rem; padding-right: 1.5rem;">
+            📋 Copy Referral Link
+          </button>
+        </div>
+
+        <div class="share-buttons-row">
+          <span style="font-size: 0.8rem; color: var(--text-dim);">Quick Share:</span>
+          <a id="share-twitter" href="#" class="share-btn">
+            <span>𝕏 Share on X</span>
+          </a>
+          <a id="share-whatsapp" href="#" class="share-btn">
+            <span>💬 WhatsApp</span>
+          </a>
+          <a id="share-telegram" href="#" class="share-btn">
+            <span>✈️ Telegram</span>
+          </a>
+          <a href="referral.html" class="share-btn" style="border-color: rgba(16, 185, 129, 0.4); color: var(--accent-primary);">
+            <span>📁 Full Marketing Assets &amp; QR Code &rarr;</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Evaluation / Simulation Sandbox Banner -->
+      <div class="sandbox-banner">
+        <div class="sandbox-info">
+          <h4>🧪 Live Referral Flow Simulator</h4>
+          <p>Test how the system tracks clicks and updates your balance when new referrals join.</p>
+        </div>
+        <div class="sandbox-actions">
+          <button id="sim-click-btn" class="btn btn-secondary btn-sm">
+            👁️ Simulate Link Click
+          </button>
+          <button id="sim-signup-btn" class="btn btn-outline btn-sm">
+            🎉 Simulate Referral Sign-Up (+$25.00)
+          </button>
+        </div>
+      </div>
+
+      <!-- Metric KPI Cards (4 Cards with Tabular Numerals) -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-card-title">Withdrawable Balance</div>
+          <div id="dash-balance" class="stat-card-value tabular-nums" style="color: var(--accent-primary);">$145.00</div>
+          <div class="stat-card-sub">Min. payout threshold: $50.00</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-title">Lifetime Earnings</div>
+          <div id="dash-total-earned" class="stat-card-value tabular-nums">$180.00</div>
+          <div class="stat-card-sub">All-time commissions cleared</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-title">Total Referrals</div>
+          <div id="dash-total-referrals" class="stat-card-value tabular-nums">6</div>
+          <div class="stat-card-sub">Direct &amp; Tier 2 active partners</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-title">Pending Clearances</div>
+          <div id="dash-pending-earnings" class="stat-card-value tabular-nums" style="color: var(--color-warning);">$35.00</div>
+          <div class="stat-card-sub">Clears in 24 hours</div>
+        </div>
+      </div>
+
+      <!-- Recent Activity Table -->
+      <div class="table-wrapper">
+        <div class="table-header-bar">
+          <h3 class="table-header-title">Recent Account &amp; Referral Activity</h3>
+          <a href="referral.html" class="btn btn-secondary btn-sm">View Full Network &rarr;</a>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Event Description</th>
+                <th>Type</th>
+                <th style="text-align: right;">Time</th>
+              </tr>
+            </thead>
+            <tbody id="dash-activity-list">
+              <!-- Injected by app.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Request Payout Modal -->
+  <div id="payout-modal" class="modal-backdrop">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Request Balance Payout</h3>
+        <button id="payout-modal-close" class="modal-close-btn">&times;</button>
+      </div>
+
+      <form id="payout-form">
+        <div class="modal-body">
+          <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.25); padding: 1rem; border-radius: 8px; margin-bottom: 1.25rem;">
+            <div style="font-size: 0.8rem; color: var(--text-muted);">Available for Withdrawal:</div>
+            <div id="payout-max-balance" class="tabular-nums" style="font-size: 1.5rem; font-weight: 700; color: var(--accent-primary);">$145.00</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="payout-amount">Withdrawal Amount ($)</label>
+            <input type="number" id="payout-amount" class="form-input" min="50" step="0.01" required />
+            <div class="form-help">Minimum payout: $50.00</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="payout-method">Payment Destination Method</label>
+            <select id="payout-method" class="form-input" style="cursor: pointer;">
+              <option value="PayPal">PayPal</option>
+              <option value="Crypto (USDT TRC20)">Cryptocurrency (USDT TRC-20)</option>
+              <option value="Crypto (Bitcoin)">Cryptocurrency (Bitcoin BTC)</option>
+              <option value="Bank Wire">International Bank Wire (ACH/SEPA)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="payout-destination">Account / Wallet Address / IBAN</label>
+            <input type="text" id="payout-destination" class="form-input" placeholder="e.g. your-paypal@email.com or wallet address" required />
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="document.getElementById('payout-modal').classList.remove('open')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Confirm &amp; Withdraw</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Mobile Bottom Navigation -->
+  <nav class="mobile-bottom-nav">
+    <a href="index.html" class="mobile-nav-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+      <span>Home</span>
+    </a>
+    <a href="dashboard.html" class="mobile-nav-item active">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+      <span>Dashboard</span>
+    </a>
+    <a href="referral.html" class="mobile-nav-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+      <span>Referrals</span>
+    </a>
+    <a href="admin.html" class="mobile-nav-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      <span>Admin</span>
+    </a>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>

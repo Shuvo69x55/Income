@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Console - Income Network</title>
+  <meta name="description" content="Income Network Administrator Console. Manage platform users, audit affiliate referrals, review commissions, and configure settings." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body class="admin-body">
+
+  <!-- Admin Top Bar -->
+  <header class="admin-header">
+    <div class="admin-header-inner">
+      <div class="admin-brand">
+        <a href="index.html" class="brand">
+          <div class="brand-icon">⚡</div>
+          <span class="brand-text">Income<span class="brand-highlight">Network</span></span>
+        </a>
+        <span class="admin-badge">Admin Suite</span>
+      </div>
+
+      <div class="admin-nav-actions">
+        <a href="dashboard.html" class="btn btn-secondary btn-sm">Affiliate View</a>
+        <a href="index.html" class="btn btn-secondary btn-sm">Main Website</a>
+        <button id="admin-logout-btn" class="btn btn-outline btn-sm">Log Out</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Admin Content Container -->
+  <main class="admin-container">
+    
+    <!-- Title & System Status -->
+    <div class="admin-page-title">
+      <div>
+        <span class="section-kicker">Platform Administration</span>
+        <h1>Master Control &amp; Affiliate Analytics</h1>
+        <p style="color: var(--admin-text-muted);">
+          Monitor global network growth, user registrations, and affiliate commission distributions.
+        </p>
+      </div>
+      <div class="meta-row">
+        <span>System Status: <strong style="color: var(--admin-accent);">● Operational</strong></span>
+        <span class="meta-separator">·</span>
+        <span>Storage Engine: <strong>LocalStorage (Static Host)</strong></span>
+      </div>
+    </div>
+
+    <!-- 4 Global KPIs -->
+    <div class="admin-stats-grid">
+      <div class="admin-stat-card">
+        <div class="admin-stat-label">Total Registered Users</div>
+        <div id="admin-total-users" class="admin-stat-value tabular-nums blue">4</div>
+        <div class="admin-stat-desc">Across all tiers</div>
+      </div>
+
+      <div class="admin-stat-card">
+        <div class="admin-stat-label">Network Referrals</div>
+        <div id="admin-total-referrals" class="admin-stat-value tabular-nums green">6</div>
+        <div class="admin-stat-desc">Attributed link conversions</div>
+      </div>
+
+      <div class="admin-stat-card">
+        <div class="admin-stat-label">Commissions Distributed</div>
+        <div id="admin-total-earnings" class="admin-stat-value tabular-nums green">$1,085.00</div>
+        <div class="admin-stat-desc">Cumulative affiliate payout pool</div>
+      </div>
+
+      <div class="admin-stat-card">
+        <div class="admin-stat-label">Active Affiliates</div>
+        <div id="admin-active-users" class="admin-stat-value tabular-nums">4</div>
+        <div class="admin-stat-desc">Accounts in good standing</div>
+      </div>
+    </div>
+
+    <!-- User Management Section Header & Search Toolbar -->
+    <div style="margin-bottom: 1rem;">
+      <h2 style="font-size: 1.35rem; margin-bottom: 0.25rem;">Affiliate User Management</h2>
+      <p style="font-size: 0.85rem; color: var(--admin-text-muted);">View account balances, inspect referral trees, credit bonuses, or suspend accounts.</p>
+    </div>
+
+    <div class="admin-toolbar">
+      <div class="admin-search-box">
+        <span class="admin-search-icon">🔍</span>
+        <input type="text" id="admin-user-search" class="admin-search-input" placeholder="Search by name, @username, email, or code..." />
+      </div>
+
+      <div class="admin-filters">
+        <span style="font-size: 0.8rem; color: var(--admin-text-dim);">Quick Filter:</span>
+        <button class="filter-chip active" onclick="
+          document.getElementById('admin-user-search').value = '';
+          document.getElementById('admin-user-search').dispatchEvent(new Event('input'));
+        ">All</button>
+        <button class="filter-chip" onclick="
+          document.getElementById('admin-user-search').value = 'Active';
+          document.getElementById('admin-user-search').dispatchEvent(new Event('input'));
+        ">Active</button>
+      </div>
+    </div>
+
+    <!-- User Table -->
+    <div class="admin-table-container">
+      <div class="table-responsive">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>User ID</th>
+              <th>User &amp; Username</th>
+              <th>Email</th>
+              <th>Referral Code</th>
+              <th>Referred By</th>
+              <th>Total Referrals</th>
+              <th>Wallet Balance</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="admin-user-tbody">
+            <!-- Populated dynamically by app.js -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Bottom 2-Column: Leaderboard & Platform Settings -->
+    <div class="admin-grid-2">
+      <!-- Leaderboard -->
+      <div class="admin-panel-card">
+        <div class="admin-panel-header">
+          <h3>🏆 Top Affiliate Leaderboard</h3>
+          <span style="font-size: 0.8rem; color: var(--admin-text-muted);">Ranked by Total Earnings</span>
+        </div>
+        <div id="admin-leaderboard" class="leaderboard-list">
+          <!-- Populated by app.js -->
+        </div>
+      </div>
+
+      <!-- Platform Settings -->
+      <div class="admin-panel-card">
+        <div class="admin-panel-header">
+          <h3>⚙️ Platform &amp; Deployment Settings</h3>
+          <span style="font-size: 0.8rem; color: var(--admin-text-muted);">Saved to LocalStorage</span>
+        </div>
+
+        <form id="admin-settings-form">
+          <div class="settings-form-group">
+            <label class="settings-label" for="setting-comm-rate">Direct Tier 1 Commission Rate (%)</label>
+            <input type="number" id="setting-comm-rate" class="form-input" min="5" max="80" value="25" />
+            <div class="settings-help">Default percentage paid on direct referral conversions.</div>
+          </div>
+
+          <div class="settings-form-group">
+            <label class="settings-label" for="setting-bonus">Welcome Starter Bonus ($)</label>
+            <input type="number" id="setting-bonus" class="form-input" min="0" max="100" value="10" />
+            <div class="settings-help">Instant credit added to every newly registered user's balance.</div>
+          </div>
+
+          <div class="settings-form-group">
+            <label class="settings-label" for="setting-min-payout">Minimum Withdrawal Threshold ($)</label>
+            <input type="number" id="setting-min-payout" class="form-input" min="10" max="500" value="50" />
+            <div class="settings-help">Threshold required before users can request payouts.</div>
+          </div>
+
+          <div class="settings-form-group">
+            <label class="settings-label" for="setting-repo-url">GitHub Pages Base URL Override (Optional)</label>
+            <input type="text" id="setting-repo-url" class="form-input" placeholder="https://YOUR-USERNAME.github.io/YOUR-REPOSITORY" />
+            <div class="settings-help">
+              Leave blank to automatically detect from current browser URL. Enter your custom repo URL if you want referral links to explicitly format as <code>https://user.github.io/repo/?ref=...</code>.
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap;">
+            <button type="button" id="save-settings-btn" class="btn btn-primary btn-sm">
+              Save Platform Settings
+            </button>
+            <button type="button" id="reset-demo-btn" class="btn btn-danger btn-sm">
+              Reset All Demo Data
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- User Details Modal -->
+  <div id="admin-user-modal" class="modal-backdrop">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>User Profile &amp; Affiliate Details</h3>
+        <button class="modal-close-btn" onclick="document.getElementById('admin-user-modal').classList.remove('open')">&times;</button>
+      </div>
+      <div id="admin-modal-body" class="modal-body">
+        <!-- Injected dynamically -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="document.getElementById('admin-user-modal').classList.remove('open')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Login Security Overlay (shown if not logged in) -->
+  <div id="admin-login-overlay" class="admin-login-overlay">
+    <div class="admin-login-box">
+      <div class="auth-header" style="margin-bottom: 1.5rem;">
+        <div class="brand" style="justify-content: center; margin-bottom: 1rem;">
+          <div class="brand-icon">⚡</div>
+          <span class="brand-text">Income<span class="brand-highlight">Network</span></span>
+        </div>
+        <h2>Administrator Access</h2>
+        <p>Restricted area. Please authenticate to open the administration console.</p>
+      </div>
+
+      <form id="admin-login-form">
+        <div class="form-group">
+          <label class="form-label" for="admin-email">Admin Username or Email</label>
+          <input type="text" id="admin-email" class="form-input" placeholder="admin@incomenetwork.io" value="admin@incomenetwork.io" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="admin-password">Admin Password</label>
+          <input type="password" id="admin-password" class="form-input" placeholder="••••••••" value="admin123" required />
+          <div class="form-help">Default Demo Credentials: admin@incomenetwork.io / admin123</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top: 1rem;">
+          Authenticate as Admin
+        </button>
+
+        <div class="auth-divider">
+          <span>Or Quick Access</span>
+        </div>
+
+        <button type="button" id="demo-admin-fill-btn" class="btn btn-secondary btn-block">
+          ⚡ 1-Click Access as Demo Administrator
+        </button>
+      </form>
+
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <a href="index.html" style="font-size: 0.85rem; color: var(--admin-text-muted);">&larr; Return to main website</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
